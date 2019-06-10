@@ -11,46 +11,117 @@
 	<style>
 		/* TODO 1 */
 		.box {
-			width: 70px;
-			height: 70px;
+			width: 200px;
+			height: 200px;
 			background-color: teal;
 			font-size: 300%;
 			text-align: center;
+			color: #0000ff;
 			display: block;
 			position: absolute;
 			top: 100px;
 			left: 0px;
+			background-image:url("https://d3bzyjrsc4233l.cloudfront.net/cache/98/39/983980592fb938e32be90ae84a042afd.jpg");
+			background-position: center;
+			background-size: cover;
 		}
+		body {
+ 			background-image: url("https://digitalsynopsis.com/wp-content/uploads/2017/02/beautiful-color-gradients-backgrounds-047-fly-high.png");
+			background-repeat: no-repeat;
+			background-size: cover; 
+			height: 650px;
+		}
+		
+		
 	</style>
 
 </head>
+
 <body class="board">
+	<a href= "/portfolio.html">back </a>
 	<!-- HTML for the box -->
 	<div class="box">?</div>
 
 	<!-- BEGIN JAVASCRIPT -->
 	<script>
 		(function(){
-			'use strict'
+			'use strict';
 			/* global jQuery */
 
 			// jQuery stuff setup for you
 			var box = jQuery('.box');
 			var boardWidth = jQuery('.board').width();
-	
+			var boardHeight = jQuery(window).height(); 
+			
 			// TODO 2 - Variable declarations 
+			var position;       // reference for the x-coordinate of our box
+			var points;         // reference for the points displayed on the box
+			var speed;          // reference for how fast the box moves
+			var direction;       // reference for the direction the box is moving: 1 means right, -1 means left
+			var vPosition;
+			var vSpeed;
+			var vDirection;
+		
 
+			box.css('left', position);// moves the box to the x-coordinate of <position>
+			box.css('top', vPosition);
+			box.text(points);               // changes the text of the box to display the value of <points>
+			position = 10;
+			points = 0;
+			speed = 10;
+			direction = 1;
+			vPosition = 1;
+			vSpeed = 10;
+			vDirection = 1;
 			
 			function update() {
 				// TODO 3 / 6 / 7 / 8
+				position += speed * direction;    // increment position by speed on every update
+				vPosition += vSpeed * vDirection;
+				console.log("new position: " + position);
 				
-			};
-
+				
+				if(position > boardWidth) {
+    			console.log("Right Wall Hit");
+    			direction = -1;
+    			console.log(direction);
+    			
+				}
+				
+				if(position < 0) {
+    			console.log("Left Wall Hit");
+    			direction = 1;
+    			console.log(direction);
+    			
+				}
+				
+				if (vPosition < 0) { 
+				console.log("Top Wall Hit");
+    			vDirection = 1;
+    			
+				}
+				
+				if (vPosition > boardHeight) { 
+				console.log("Bottom Wall Hit");
+    			vDirection = -1;
+				}
+    			
+				box.css('left', position);      // set the 'left' CSS property of the box to the new value of position
+				box.css("top", vPosition);
+				box.css("width", position / 2);
+				box.css("height", position / 2);
+				
+				};
+				
 
 			
 			function handleBoxClick() {
 				// TODO 4 / 5
-				
+				 points += 1;           // increase the point total
+				 box.text(points);      // update the new points total displayed by the box
+				 position = Math.random() * boardWidth;;         // reset the position of the box to 0
+				 vPosition = Math.random() * boardHeight;
+				 speed += 1;    // increase the speed of the box on every click
 			};
 
 
