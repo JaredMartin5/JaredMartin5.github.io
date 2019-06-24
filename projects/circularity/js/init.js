@@ -35,7 +35,7 @@ var init = function (window) {
 
         // TODO 7 : Create a Loop to call drawCircle 100 time
 
-        for (var counter = 0; counter < 500; counter++) {
+        for (var counter = 0; counter < 1000; counter++) {
             // do something
             drawCircle() + 1
         }
@@ -69,11 +69,10 @@ var init = function (window) {
     
         function update() {
             // TODO 4 : Update the circle's position //
-            
             // TODO 5 : Call game.checkCirclePosition on your circles.
             
             // TODO 8 : Iterate over the array
-            for (var i = 0; i < 500; i++){
+            for (var i = 0; i < 1000; i++){
             game.checkCirclePosition(circles[i]);
             physikz.updatePosition(circles[i]);
             }

@@ -11,14 +11,20 @@ $(document).ready(function() {
         // _.forEach(topRated, function(recording) {
         //     console.log(recording);
         // });
-       $('#section-bio').css('color', 'red');
-       $('#section-quotes').css('color', 'blue');
-       let topRated = data.discography.topRated;
-       _.forEach(topRated, function(recording) {
-       console.log(recording);
-});
-let $section = $('<section>').attr('id', 'section-rider');
-$section.append($('<h3>').text('Billy\'s Rider')).appendTo($('#list-top-rated'));
+        $('#section-bio').css('color', 'red');
+        $('#section-quotes').css('color', 'blue');
+        let topRated = data.discography.topRated;
+        _.forEach(topRated, function(recording) {
+            console.log(recording);
+        });
+        var titles = _.map(topRated, "title");
+        for (var i = 0; i < titles.length; i++) {
+        $('#list-top-rated').append($('<li>').text(titles[i]).appendTo('#list-top-rated'));    
+        }
+        
+        
+        let $section = $('<section>').attr('id', 'section-rider');
+        $section.append($('<h3>').text('Billy\'s Rider')).appendTo($('#list-top-rated'));
 
         
         // YOUR CODE ABOVE HERE //
